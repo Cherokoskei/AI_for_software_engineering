@@ -1,0 +1,32 @@
+
+Task 1: AI-Powered Code Completion
+# manual implementation
+def sort_dicts_by_key(data, sort_key):
+    return sorted(data, key=lambda x: x[sort_key])
+
+# sample data
+data = [
+    {'name': 'Alice', 'age': 30},
+    {'name': 'Bob', 'age': 25},
+    {'name': 'Charlie', 'age': 35}
+]
+
+sorted_data = sort_dicts_by_key(data, 'age')
+print(sorted_data)
+
+# AI-suggested code
+
+def sort_list_of_dicts_ai(lst, key):
+    return sorted(lst, key=lambda d: d.get(key, 0))  # Default to 0 if key is missing
+
+sorted_ai = sort_list_of_dicts_ai(data, 'age')
+print("AI-Suggested Version:")
+for item in sorted_ai:
+    print(item)
+
+*****Word Analysis*****
+In this task, I wrote a Python function to sort a list of dictionaries by a given key manually, and then allowed GitHub Copilot to suggest its own version.
+Both implementations use Python’s built-in sorted() function with a lambda as the key.
+
+This exercise shows that AI-powered code completion tools can provide not just correct but also more defensive and production-ready code snippets.
+However, manual review is still essential to ensure the suggestions meet the task requirements and data assumptions.
