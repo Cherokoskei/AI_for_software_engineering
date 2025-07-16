@@ -1,0 +1,44 @@
+# Step 1: Import libraries
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, f1_score, classification_report
+
+# Step 2: Load local CSV file
+df = pd.read_csv("data.csv")  # Replace with your file path
+
+# Step 3: Check column names
+print(df.columns)  # Helps you verify how 'diagnosis' is labeled (e.g., "diagnosis", "target", or something else)
+
+# If needed: Rename columns or handle missing data
+# df.rename(columns={'old_name': 'diagnosis'}, inplace=True)
+
+# Step 4: Simulate priority column
+df["priority"] = df["diagnosis"].apply(lambda x: "High" if x == 0 else "Low")  # 0 = malignant, 1 = benign
+
+# Step 5: Features and Labels
+X = df.drop(["diagnosis", "priority"], axis=1)
+y = df["priority"]
+
+# Step 6: Encode labels
+le = LabelEncoder()
+y_encoded = le.fit_transform(y)
+
+# Step 7: Split dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=42)
+
+# Step 8: Train model
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Step 9: Predict and evaluate
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+# Step 10: Output
+print("Accuracy:", round(accuracy * 100, 2), "%")
+print("F1 Score:", round(f1, 2))
+print("\nClassification Report:\n", classification_report(y_test, y_pred, target_names=["High", "Low"]))
