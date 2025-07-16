@@ -1,0 +1,38 @@
+#selenium test case
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+# Set up Chrome driver (you can also use Firefox or Edge)
+driver = webdriver.Chrome()  # Make sure chromedriver is in your PATH
+
+# Step 1: Open the login page
+driver.get("https://the-internet.herokuapp.com/login")
+
+# Step 2: Enter valid credentials
+driver.find_element(By.ID, "username").send_keys("tomsmith")
+driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+driver.find_element(By.ID, "password").send_keys(Keys.RETURN)
+
+# Step 3: save screenshot
+time.sleep(2)
+driver.save_screenshot("login_test_result.png")
+
+# Step 4: Print result
+if "secure" in driver.current_url:
+    print("Login Success Test Passed")
+else:
+    print("Login Test Failed")
+
+# Close the browser
+driver.quit()
+
+
+***word analysis**
+Automated testing using Selenium and AI-powered tools like Testim.io significantly improves test reliability and coverage.
+While traditional Selenium scripts depend heavily on static element locators (IDs, XPaths), AI plugins dynamically detect and adapt to UI changes, reducing test maintenance. 
+In our login test case, AI-enhanced frameworks can also identify edge cases such as network delays, missing buttons, or incorrect form validation rules. 
+Unlike manual testing, which is time-consuming and error-prone, AI accelerates testing cycles and highlights flakiness in tests.
+AI systems can even auto-suggest missing test scenarios based on usage patterns. Overall, AI makes testing more intelligent, resilient, and scalable.
